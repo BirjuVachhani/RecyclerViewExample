@@ -44,7 +44,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
 
         holder.mtitle.setText(data.getTitle());
         holder.mdesc.setText(data.getDesc());
-        holder.mimg.setImageResource(data.getImageId());
+        holder.mimg.setImageResource(data.getThumbId());
         holder.imageId=data.getImageId();
 
     }
