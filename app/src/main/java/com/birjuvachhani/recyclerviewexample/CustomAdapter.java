@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Collections;
 import java.util.List;
@@ -32,7 +33,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
     public CustomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View view=inflater.inflate(R.layout.layout_single_row,parent,false);
-        CustomViewHolder holder=new CustomViewHolder(view);
+        CustomViewHolder holder=new CustomViewHolder(context, view);
 
         return holder;
     }
@@ -58,13 +59,21 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         ImageView mimg;
         TextView mtitle;
         TextView mdesc;
+        Context context;
 
-        public CustomViewHolder(View itemView) {
+        public CustomViewHolder(final Context context, View itemView) {
             super(itemView);
 
             mimg=(ImageView)itemView.findViewById(R.id.iv_img);
             mtitle=(TextView)itemView.findViewById(R.id.tv_title);
             mdesc=(TextView)itemView.findViewById(R.id.tv_desc);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(context,mtitle.getText(),Toast.LENGTH_SHORT).show();
+                }
+            });
 
         }
     }
