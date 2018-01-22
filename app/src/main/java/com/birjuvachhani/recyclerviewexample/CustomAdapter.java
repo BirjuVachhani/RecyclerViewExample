@@ -1,6 +1,7 @@
 package com.birjuvachhani.recyclerviewexample;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,6 +47,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         holder.mtitle.setText(data.getTitle());
         holder.mdesc.setText(data.getDesc());
         holder.mimg.setImageResource(data.getImageId());
+        holder.imageId=data.getImageId();
 
     }
 
@@ -59,6 +61,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         ImageView mimg;
         TextView mtitle;
         TextView mdesc;
+        int imageId;
         Context context;
 
         public CustomViewHolder(final Context context, View itemView) {
@@ -71,7 +74,11 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(context,mtitle.getText(),Toast.LENGTH_SHORT).show();
+                    Intent intent=new Intent(context,DetailedActivity.class);
+                    intent.putExtra(Constants.IMAGE_LABEL,imageId);
+                    intent.putExtra(Constants.TITLE_LABEL,mtitle.getText());
+                    intent.putExtra(Constants.DESC_LABEL,mdesc.getText());
+                    context.startActivity(intent);
                 }
             });
 
