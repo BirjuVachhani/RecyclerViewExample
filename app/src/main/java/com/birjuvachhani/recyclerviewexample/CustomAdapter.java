@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -17,13 +18,14 @@ import java.util.List;
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder> {
 
     private LayoutInflater inflater;
-    private List<DataHolder> dataSet;
+    private List<DataHolder> dataSet= Collections.emptyList();
     private Context context;
 
     public CustomAdapter(Context context, List<DataHolder> dataSet)
     {
         this.context=context;
         this.dataSet=dataSet;
+        inflater=LayoutInflater.from(context);
     }
 
     @Override
