@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -21,21 +22,20 @@ import butterknife.ButterKnife;
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder> {
 
     private LayoutInflater inflater;
-    private List<DataHolder> dataSet= Collections.emptyList();
+    private List<DataHolder> dataSet = Collections.emptyList();
     private Context context;
 
-    public CustomAdapter(Context context, List<DataHolder> dataSet)
-    {
-        this.context=context;
-        this.dataSet=dataSet;
-        inflater=LayoutInflater.from(context);
+    public CustomAdapter(Context context, List<DataHolder> dataSet) {
+        this.context = context;
+        this.dataSet = dataSet;
+        inflater = LayoutInflater.from(context);
     }
 
     @Override
     public CustomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view=inflater.inflate(R.layout.layout_single_row,parent,false);
-        CustomViewHolder holder=new CustomViewHolder(context, view);
+        View view = inflater.inflate(R.layout.layout_single_row, parent, false);
+        CustomViewHolder holder = new CustomViewHolder(context, view);
 
         return holder;
     }
@@ -43,12 +43,12 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
     @Override
     public void onBindViewHolder(CustomViewHolder holder, int position) {
 
-        DataHolder data=dataSet.get(position);
+        DataHolder data = dataSet.get(position);
 
         holder.mtitle.setText(data.getTitle());
         holder.mdesc.setText(data.getDesc());
         holder.mimg.setImageResource(data.getThumbId());
-        holder.imageId=data.getImageId();
+        holder.imageId = data.getImageId();
 
     }
 
@@ -57,26 +57,28 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         return dataSet.size();
     }
 
-    class CustomViewHolder extends RecyclerView.ViewHolder{
+    class CustomViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.iv_img) ImageView mimg;
-        @BindView(R.id.tv_title) TextView mtitle;
-        @BindView(R.id.tv_desc) TextView mdesc;
+        @BindView(R.id.iv_img)
+        ImageView mimg;
+        @BindView(R.id.tv_title)
+        TextView mtitle;
+        @BindView(R.id.tv_desc)
+        TextView mdesc;
         int imageId;
         Context context;
 
         public CustomViewHolder(final Context context, View itemView) {
             super(itemView);
 
-            ButterKnife.bind(this,itemView);
+            ButterKnife.bind(this, itemView);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent=new Intent(context,DetailedActivity.class);
-                    intent.putExtra(Constants.IMAGE_LABEL,imageId);
-                    intent.putExtra(Constants.TITLE_LABEL,mtitle.getText());
-                    intent.putExtra(Constants.DESC_LABEL,mdesc.getText());
+                    Intent intent = new Intent(context, DetailedActivity.class);
+                    DataHolder data = new DataHolder(imageId, mtitle.getText().toString(), mdesc.getText().toString());
+                    intent.putExtra(Constants.PARCEL_LABEL,data);
                     context.startActivity(intent);
                 }
             });

@@ -26,13 +26,11 @@ public class DetailedActivity extends AppCompatActivity {
         {
             Intent intent=getIntent();
 
-            int imageId=intent.getIntExtra(Constants.IMAGE_LABEL,0);
-            String title=intent.getStringExtra(Constants.TITLE_LABEL);
-            String desc=intent.getStringExtra(Constants.DESC_LABEL);
+            DataHolder data=intent.getParcelableExtra(Constants.PARCEL_LABEL);
 
-            mimg.setImageResource(imageId);
-            mtitle.setText(title);
-            mdesc.setText(desc);
+            mimg.setImageResource(data.getImageId());
+            mtitle.setText(data.getTitle());
+            mdesc.setText(data.getDesc());
         }
     }
 }
