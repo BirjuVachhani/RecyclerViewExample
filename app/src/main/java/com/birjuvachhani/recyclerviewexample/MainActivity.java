@@ -1,16 +1,20 @@
 package com.birjuvachhani.recyclerviewexample;
 
+import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+
+import com.birjuvachhani.recyclerviewexample.databinding.ActivityMainBinding;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private RecyclerView mrecyclerView;
+    private ActivityMainBinding binding;
     private String []titles;
     private String []desc;
     private int []thumbs={R.drawable.thmb1,R.drawable.thmb2,R.drawable.thmb3,R.drawable.thmb4,R.drawable.thmb5,
@@ -28,9 +32,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
-        mrecyclerView=(RecyclerView)findViewById(R.id.recycler_view);
+        binding= DataBindingUtil.setContentView(this,R.layout.activity_main);
+
 
         //getting resources from string.xml
         titles=getResources().getStringArray(R.array.titles);
@@ -41,8 +45,8 @@ public class MainActivity extends AppCompatActivity {
 
         //creating adapter for recycler view
         CustomAdapter adapter=new CustomAdapter(MainActivity.this,dataSet);
-        mrecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mrecyclerView.setAdapter(adapter);
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        binding.recyclerView.setAdapter(adapter);
 
 
     }
