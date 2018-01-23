@@ -2,12 +2,17 @@ package com.birjuvachhani.recyclerviewexample;
 
 import android.content.Context;
 import android.content.Intent;
+import android.databinding.BindingAdapter;
+import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.birjuvachhani.recyclerviewexample.databinding.RowBinding;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -18,21 +23,20 @@ import java.util.List;
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder> {
 
     private LayoutInflater inflater;
-    private List<DataHolder> dataSet= Collections.emptyList();
+    private List<DataHolder> dataSet = Collections.emptyList();
     private Context context;
 
-    public CustomAdapter(Context context, List<DataHolder> dataSet)
-    {
-        this.context=context;
-        this.dataSet=dataSet;
-        inflater=LayoutInflater.from(context);
+    public CustomAdapter(Context context, List<DataHolder> dataSet) {
+        this.context = context;
+        this.dataSet = dataSet;
+        inflater = LayoutInflater.from(context);
     }
 
     @Override
     public CustomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view=inflater.inflate(R.layout.layout_single_row,parent,false);
-        CustomViewHolder holder=new CustomViewHolder(context, view);
+        RowBinding mrowBinding = RowBinding.inflate(inflater, parent, false);
+        CustomViewHolder holder = new CustomViewHolder(context, mrowBinding);
 
         return holder;
     }
@@ -40,12 +44,10 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
     @Override
     public void onBindViewHolder(CustomViewHolder holder, int position) {
 
-        DataHolder data=dataSet.get(position);
+        DataHolder data = dataSet.get(position);
 
-        holder.mtitle.setText(data.getTitle());
-        holder.mdesc.setText(data.getDesc());
-        holder.mimg.setImageResource(data.getThumbId());
-        holder.imageId=data.getImageId();
+        holder.bind(data);
+        holder.mrowBinding.executePendingBindings();
 
     }
 
@@ -54,32 +56,39 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         return dataSet.size();
     }
 
-    class CustomViewHolder extends RecyclerView.ViewHolder{
+    class CustomViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView mimg;
-        TextView mtitle;
-        TextView mdesc;
-        int imageId;
         Context context;
+        RowBinding mrowBinding;
 
-        public CustomViewHolder(final Context context, View itemView) {
-            super(itemView);
+        public CustomViewHolder(final Context context, final RowBinding mrowBinding) {
+            super(mrowBinding.getRoot());
+            this.mrowBinding = mrowBinding;
+            this.context = context;
 
-            mimg=(ImageView)itemView.findViewById(R.id.iv_img);
-            mtitle=(TextView)itemView.findViewById(R.id.tv_title);
-            mdesc=(TextView)itemView.findViewById(R.id.tv_desc);
-
-            itemView.setOnClickListener(new View.OnClickListener() {
+            this.mrowBinding.getRoot().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent=new Intent(context,DetailedActivity.class);
-                    intent.putExtra(Constants.IMAGE_LABEL,imageId);
-                    intent.putExtra(Constants.TITLE_LABEL,mtitle.getText());
-                    intent.putExtra(Constants.DESC_LABEL,mdesc.getText());
+                    DataHolder data = mrowBinding.getDataholder();
+                    Intent intent = new Intent(context, DetailedActivity.class);
+                    intent.putExtra(Constants.IMAGE_LABEL, data.getImageId());
+                    intent.putExtra(Constants.TITLE_LABEL, data.getTitle());
+                    intent.putExtra(Constants.DESC_LABEL, data.getDesc());
                     context.startActivity(intent);
                 }
             });
 
+        }
+
+        public void bind(DataHolder dataHolder) {
+            mrowBinding.setDataholder(dataHolder);
+        }
+    }
+
+    @BindingAdapter("src")
+    public static void setImageSrc(ImageView view, int imageId) {
+        if (imageId != -1) {
+            view.setImageResource(imageId);
         }
     }
 }
