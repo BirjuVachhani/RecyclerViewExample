@@ -6,20 +6,21 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class DetailedActivity extends AppCompatActivity {
 
-    private ImageView mimg;
-    private TextView mtitle;
-    private TextView mdesc;
+    @BindView(R.id.iv_img) ImageView mimg;
+    @BindView(R.id.tv_title) TextView mtitle;
+    @BindView(R.id.tv_desc) TextView mdesc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detailed);
 
-        mimg=(ImageView)findViewById(R.id.iv_img);
-        mtitle=(TextView)findViewById(R.id.tv_title);
-        mdesc=(TextView)findViewById(R.id.tv_desc);
+        ButterKnife.bind(this);
 
         if(getIntent()!=null)
         {
