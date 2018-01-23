@@ -11,6 +11,9 @@ import android.widget.TextView;
 import java.util.Collections;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by birju.vachhani on 19/01/18.
  */
@@ -56,18 +59,16 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
 
     class CustomViewHolder extends RecyclerView.ViewHolder{
 
-        ImageView mimg;
-        TextView mtitle;
-        TextView mdesc;
+        @BindView(R.id.iv_img) ImageView mimg;
+        @BindView(R.id.tv_title) TextView mtitle;
+        @BindView(R.id.tv_desc) TextView mdesc;
         int imageId;
         Context context;
 
         public CustomViewHolder(final Context context, View itemView) {
             super(itemView);
 
-            mimg=(ImageView)itemView.findViewById(R.id.iv_img);
-            mtitle=(TextView)itemView.findViewById(R.id.tv_title);
-            mdesc=(TextView)itemView.findViewById(R.id.tv_desc);
+            ButterKnife.bind(this,itemView);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
