@@ -71,9 +71,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
                 public void onClick(View v) {
                     DataHolder data = mrowBinding.getDataholder();
                     Intent intent = new Intent(context, DetailedActivity.class);
-                    intent.putExtra(Constants.IMAGE_LABEL, data.getImageId());
-                    intent.putExtra(Constants.TITLE_LABEL, data.getTitle());
-                    intent.putExtra(Constants.DESC_LABEL, data.getDesc());
+                    intent.putExtra(Constants.PARCEL_LABEL,data);
                     context.startActivity(intent);
                 }
             });
