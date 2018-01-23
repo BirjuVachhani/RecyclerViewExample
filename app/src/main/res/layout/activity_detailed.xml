@@ -1,39 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.birjuvachhani.recyclerviewexample.DetailedActivity">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
-        android:id="@+id/iv_img"
-        android:layout_width="match_parent"
-        android:layout_height="305dp"
-        android:scaleType="centerCrop"
-        tools:src="@tools:sample/avatars" />
+    <data class="DetailedActivityBinding">
+
+        <variable
+            name="dataholder"
+            type="com.birjuvachhani.recyclerviewexample.DataHolder" />
+    </data>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="16dp">
+        tools:context="com.birjuvachhani.recyclerviewexample.DetailedActivity">
 
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="@tools:sample/first_names"
-            android:textSize="32sp"/>
+        <ImageView
+            android:id="@+id/iv_img"
+            android:layout_width="match_parent"
+            android:layout_height="305dp"
+            android:scaleType="centerCrop"
+            app:src="@{dataholder.imageId}"
+            tools:src="@tools:sample/avatars" />
 
-        <TextView
-            android:id="@+id/tv_desc"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:text="@tools:sample/lorem/random"
-            android:textSize="16sp"/>
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{dataholder.title}"
+                android:textSize="32sp"
+                tools:text="@tools:sample/first_names" />
+
+            <TextView
+                android:id="@+id/tv_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{dataholder.desc}"
+                android:textSize="16sp"
+                tools:text="@tools:sample/lorem/random" />
+
+        </LinearLayout>
 
     </LinearLayout>
-
-</LinearLayout>
+</layout>
