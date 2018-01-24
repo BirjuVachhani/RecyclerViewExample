@@ -2,6 +2,7 @@ package com.birjuvachhani.recyclerviewexample;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import java.util.ArrayList;
@@ -41,8 +42,13 @@ public class MainActivity extends AppCompatActivity {
 
         //creating adapter for recycler view
         CustomAdapter adapter=new CustomAdapter(MainActivity.this,dataSet);
-        mrecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(this);
+        DividerItemDecoration dividerItemDecoration=new DividerItemDecoration(this,DividerItemDecoration.VERTICAL);
+
+
+        mrecyclerView.setLayoutManager(layoutManager);
         mrecyclerView.setAdapter(adapter);
+        mrecyclerView.addItemDecoration(dividerItemDecoration);
 
 
     }
