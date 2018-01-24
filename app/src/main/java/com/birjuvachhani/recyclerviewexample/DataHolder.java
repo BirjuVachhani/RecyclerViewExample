@@ -11,12 +11,11 @@ public class DataHolder {
     private String desc;
     private int thumbId;
 
-    public DataHolder(int imageId, int thumbId, String title, String desc)
-    {
-        this.imageId=imageId;
-        this.title=title;
-        this.desc=desc;
-        this.thumbId=thumbId;
+    public DataHolder(int imageId, int thumbId, String title, String desc) {
+        this.imageId = imageId;
+        this.title = title;
+        this.desc = desc;
+        this.thumbId = thumbId;
     }
 
     public int getImageId() {

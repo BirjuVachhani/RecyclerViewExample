@@ -17,17 +17,16 @@ public class DetailedActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detailed);
 
-        mimg=(ImageView)findViewById(R.id.iv_img);
-        mtitle=(TextView)findViewById(R.id.tv_title);
-        mdesc=(TextView)findViewById(R.id.tv_desc);
+        mimg = (ImageView) findViewById(R.id.iv_img);
+        mtitle = (TextView) findViewById(R.id.tv_title);
+        mdesc = (TextView) findViewById(R.id.tv_desc);
 
-        if(getIntent()!=null)
-        {
-            Intent intent=getIntent();
+        if (getIntent() != null) {
+            Intent intent = getIntent();
 
-            int imageId=intent.getIntExtra(Constants.IMAGE_LABEL,0);
-            String title=intent.getStringExtra(Constants.TITLE_LABEL);
-            String desc=intent.getStringExtra(Constants.DESC_LABEL);
+            int imageId = intent.getIntExtra(Constants.IMAGE_LABEL, 0);
+            String title = intent.getStringExtra(Constants.TITLE_LABEL);
+            String desc = intent.getStringExtra(Constants.DESC_LABEL);
 
             mimg.setImageResource(imageId);
             mtitle.setText(title);

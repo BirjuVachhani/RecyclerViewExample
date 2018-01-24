@@ -49,6 +49,12 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
 
     }
 
+    public void removeItem(int position)
+    {
+        dataSet.remove(position);
+        notifyItemRemoved(position);
+    }
+
     @Override
     public int getItemCount() {
         return dataSet.size();
